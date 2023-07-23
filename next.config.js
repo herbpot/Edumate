@@ -5,7 +5,10 @@ const nextConfig = {
     webpack5: true,
     webpack: (config) => {
       config.resolve.fallback = { fs: false };
-  
+      config.module.rules.push({
+        test: /\.html$/i,
+        use: 'html-loader',
+      });
       return config;
     },
     externals: {

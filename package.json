@@ -14,19 +14,29 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "aws-sdk": "^2.1420.0",
     "bcryptjs": "^2.4.3",
+    "dgram": "^1.0.1",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
+    "mock-aws-s3": "^4.0.2",
+    "net": "^1.0.2",
     "next": "13.4.10",
+    "nock": "^13.3.2",
     "postcss": "8.4.26",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "send": "^0.18.0",
     "sqlite": "^5.0.1",
     "sqlite3": "^5.1.6",
     "tailwindcss": "3.3.3",
+    "tls": "^0.0.1",
     "typescript": "5.1.6"
   },
   "browser": {
     "child_process": false
+  },
+  "devDependencies": {
+    "html-loader": "^4.2.0"
   }
 }
