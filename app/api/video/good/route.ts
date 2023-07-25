@@ -1,7 +1,7 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import { useRouter } from 'next/router';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOption } from '../../auth/[...nextauth]/route';
 
 async function updateVideoGood(req:Request) {
     
@@ -10,12 +10,16 @@ async function updateVideoGood(req:Request) {
         driver: sqlite3.Database,
     });
     const vid = req.headers.get('vid')
-    const id = await getSession()
+    const session = await getServerSession(authOption)
+    console.log(session);
+    
     
     const video = await db.get(`SELECT good FROM video where id='${vid}'`);
-    // console.log(vid, id, req, video,`update video set good=${video+1} where id='${vid}'`);
-    await db.exec(`insert into goods (videoId, userId) values ('${vid}', '${id?.user?.email}')`)
-    await db.exec(`update video set good=${video.good+1} where id='${vid}'`)
+    const g = await db.get(`select * from goods where videoid=${vid} and userId='${session?.user?.email}'`)
+    if (g === undefined){
+        await db.exec(`insert into goods (videoId, userId) values ('${vid}', '${session?.user?.email}')`)
+        await db.exec(`update video set good=${video.good+1} where id='${vid}'`)
+    }
     return new Response(null,{
         status: 206,
     })

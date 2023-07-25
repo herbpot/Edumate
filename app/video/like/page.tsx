@@ -1,22 +1,23 @@
-import sqlite3 from 'sqlite3'
-import { open } from 'sqlite'
+'use client'
 import Link from 'next/link';
 
 
 export default async function Home() {
-  const db = await open({
-    filename: './db.sqlite',
-    driver: sqlite3.Database,
-  });
-
-  const video = await db.all("SELECT * FROM video ORDER BY good");
+  const video: {videos:[{}]} = await fetch('http://localhost:3000/api/videos/like',{
+    method: 'POST',
+    next: {
+      revalidate: 10,
+    }
+  }).then(async (res) => await res.json())
+  console.log(video);
+  
   const cut = 3
   const videos: any[][] = [[]]
-  video.map((i) => {
-    if (video.indexOf(i) / cut){
+  video.videos.map((i) => {
+    if (video.videos.indexOf(i) / cut){
       videos.push(new Array())
     }
-    videos[Math.floor(video.indexOf(i) / cut)].push(i)
+    videos[Math.floor(video.videos.indexOf(i) / cut)].push(i)
   })
   
   return (

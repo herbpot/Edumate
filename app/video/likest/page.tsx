@@ -9,7 +9,7 @@ export default async function Home() {
     driver: sqlite3.Database,
   });
 
-  const video = await db.all("SELECT * FROM video ORDER BY good");
+  const video = await db.all("SELECT * FROM video ORDER BY good DESC");
   const cut = 3
   const videos: any[][] = [[]]
   video.map((i) => {
