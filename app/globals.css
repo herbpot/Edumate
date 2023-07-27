@@ -39,7 +39,7 @@
 }
 .videoDiscription small {
   margin: 3px;
-  padding: 1px;
+  padding: 2px;
   color: rgb(175, 175, 175);
   border-inline: 1px solid;
   border-radius: 3px;
@@ -51,6 +51,10 @@
   background-color: rgb(29, 29, 29);
   padding: 10px;
   width : 50%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: flex;
+  min-height: 700px;
 }
 .fileFrame{
   margin-left: 5px;
@@ -61,6 +65,8 @@
 .video {
   width: 300px;
   margin: 15px;
+  margin-inline: auto;
+
   min-height: 300px;
 }
 .hori {
@@ -71,6 +77,27 @@
   width: 80%;
   margin: auto;
 }
+.uploadForm {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+}
+.uploadForm input {
+  margin-bottom: 20px;
+}
+.uploadForm select {
+  margin-block: 20px;
+}
+.uploadForm textarea {
+  min-height: 200px;
+  height: fit-content;
+}
+.uploadsrc{
+  min-height: 500px;
+  margin-block: 10px;
+  background-color: rgb(29, 29, 29);
+}
 body {
   background-color: black;
-  }
+}

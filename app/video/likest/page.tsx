@@ -22,13 +22,10 @@ export default async function Home() {
   return (
     <div>      
       <div className='videoFrame full'>
-        {videos.map((video) => {
-          return (
-            <div className='video hori'>
-              {video.map((i) => {
+        {video.map((i) => {
             return (
-              <Link href={'/video/'+i.id}>
-                <div className='video'>
+              <div className='video'>
+                <Link href={'/video/'+i.id} className='video'>
                   <div className='thumbnail videoViewFrame'>
                     <video src={'/api/video?fileName='+i.src}></video>
                   </div>
@@ -39,12 +36,8 @@ export default async function Home() {
                       <small>{i.view}회 시청</small>
                     </div>
                   </div>
-                </div>
-              </Link>
-              )
-            })
-          }
-            </div>
+                </Link>
+              </div>
           )
           })
         }

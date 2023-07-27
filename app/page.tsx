@@ -10,25 +10,14 @@ export default async function Home() {
   });
 
   const video = await db.all("SELECT * FROM video");
-  const cut = 3
-  const videos: any[][] = [[]]
-  video.map((i) => {
-    if (video.indexOf(i) / cut){
-      videos.push(new Array())
-    }
-    videos[Math.floor(video.indexOf(i) / cut)].push(i)
-  })
   
   return (
     <div>      
       <div className='videoFrame full'>
-        {videos.map((video) => {
-          return (
-            <div className='video hori'>
-              {video.map((i) => {
+        {video.map((i) => {
             return (
-              <Link href={'/video/'+i.id}>
-                <div className='video'>
+              <div className='video'>
+                <Link href={'/video/'+i.id} className='video'>
                   <div className='thumbnail videoViewFrame'>
                     <video src={'/api/video?fileName='+i.src}></video>
                   </div>
@@ -39,12 +28,8 @@ export default async function Home() {
                       <small>{i.view}회 시청</small>
                     </div>
                   </div>
-                </div>
-              </Link>
-              )
-            })
-          }
-            </div>
+                </Link>
+              </div>
           )
           })
         }

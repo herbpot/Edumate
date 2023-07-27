@@ -4,6 +4,14 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOption } from "../../auth/[...nextauth]/route";
 import { notFound } from "next/navigation";
+import { format } from "util";
+
+function datedecode(date: string){
+    const year = date.slice(0, 4)
+    const month = date.slice(4, 6)
+    const day = date.slice(6, 8)
+    return [year, month, day]
+}
 
 async function videoinfo(req: Request){
     const db = await open({
@@ -28,7 +36,7 @@ async function videoinfo(req: Request){
     return NextResponse.json({
         title: video.title,
         src: video.src, 
-        date: video.date,
+        date: format('%s년 %s월 %s일', ...datedecode(video.date)),
         view: video.view,
         good: video.good,
     })
