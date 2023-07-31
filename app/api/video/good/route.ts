@@ -15,7 +15,7 @@ async function updateVideoGood(req:Request) {
     
     
     const video = await db.get(`SELECT good FROM video where id='${vid}'`);
-    const g = await db.get(`select * from goods where videoid=${vid} and userId='${session?.user?.email}'`)
+    const g = await db.get(`select * from goods where videoid='${vid}' and userId='${session?.user?.email}'`)
     if (g === undefined){
         await db.exec(`insert into goods (videoId, userId) values ('${vid}', '${session?.user?.email}')`)
         await db.exec(`update video set good=${video.good+1} where id='${vid}'`)

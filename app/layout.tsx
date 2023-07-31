@@ -10,7 +10,8 @@ const nanum_gothic = Nanum_Gothic({
 });
 
 export const metadata = {
-  
+  title: '???',
+  encoding: 'utf-8'
 };
 
 type Props = {

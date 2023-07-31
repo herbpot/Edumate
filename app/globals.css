@@ -14,11 +14,17 @@
   text-decoration: none;
   color: white;
 }
+.navbar div {
+  display: flex;
+}
+.navbar div h5 {
+  margin-inline: 10px;
+}
 .navAuth{
   float: right;
   margin-left: auto;
   color: whitesmoke;
-  font-size: 3px;
+  /* font-size: 3px; */
   font-style: bold;
 }
 .navAuth button {
@@ -30,6 +36,9 @@
   border-radius: 5px;
   background-color: rgb(175, 175, 175);
   margin-bottom: 30px;
+}
+.testVideo{
+  width: 100%;
 }
 .videoViewFrame{
   display: flex;
@@ -94,9 +103,27 @@
   height: fit-content;
 }
 .uploadsrc{
-  min-height: 500px;
+  min-height: 200px;
+  height: inherit;
   margin-block: 10px;
+  padding: 10px;
   background-color: rgb(29, 29, 29);
+}
+.etcfile{
+  border: 1px solid;
+  border-color: whitesmoke;
+  color: white;
+  margin-bottom: 3px;
+  padding: 2px;
+  padding-inline: 10px;
+  display: flex;
+}
+.etcfile small {
+  margin-block: auto;
+  margin-inline-start: 10px;
+}
+.userinfo h3 {
+  color: white;
 }
 body {
   background-color: black;

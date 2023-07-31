@@ -13,7 +13,7 @@ export default function Nav() {
     return (
         <div>
             <div className='navbar'>
-                <img src="favicon.ico" alt="" />
+                <img src="/favicon.ico" alt="" />
                 <Link href='/'>Home</Link>
                 <Link href='/video/recent'>최근 본 영상</Link>
                 <Link href='/video/like'>좋아요 표시한 영상</Link>
@@ -22,11 +22,11 @@ export default function Nav() {
                 {
                     session ?
                     <div>
-                        {session.user?.name}
-                        <button onClick={() => signOut()}>로그아웃</button>
+                        <h5 onClick={() => {window.location.href = `/user`}}>{session.user?.name}</h5>
+                        <h5 onClick={() => signOut()}>로그아웃</h5>
                     </div>
                     :
-                    <button onClick={() => signIn()}>로그인</button>
+                    <h3 onClick={() => signIn()}>로그인</h3>
                 }
                 </div>
             </div>

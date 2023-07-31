@@ -27,7 +27,7 @@ export default async function Video({ params }: any) {
         <div className="videoViewFrame">
           <div className="videoFrame">
             <video src={'/api/video?fileName='+video!.src} controls></video>
-            <Description video={video} id={params.id} isUploader={false} />
+            <Description video={video} id={params.id} isUploader={true} />
           </div>  
           <div className="fileFrame">
             <div className="files">{video.files}</div>

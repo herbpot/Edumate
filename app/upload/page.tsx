@@ -1,8 +1,11 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { setCookie } from 'cookies-next'
 
 function Upload() {
   const [file, setFile] = useState<File>()
+  const id = (Math.round(new Date().getTime() + Math.random()*10000)).toString()
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -10,16 +13,27 @@ function Upload() {
 
     try {
       const data = new FormData()
-      console.log(file);
       
       data.set('file', file)
-
-      const res = await fetch('/api/upload', {
+      
+      const title = document.getElementById('title')!.value
+      const description = document.getElementById('description')!.value
+      const tag_ = document.getElementById('tag')!
+      const tag = tag_.options[tag_.selectedIndex].value
+      setCookie('id', id)
+      const res = await fetch('/api/video/upload', {
         method: 'POST',
+        headers: {
+          title: title,
+          description: description,
+          tag: tag,
+          isVideo:'true'
+        },
         body: data
       })
       // handle the error
       if (!res.ok) throw new Error(await res.text())
+      window.location.href += '/etcfile'
     } catch (e: any) {
       // Handle errors here
       console.error(e)
@@ -29,7 +43,7 @@ function Upload() {
     <div className='uploadForm'>
       <form onSubmit={onSubmit} className='uploadForm'>
         <div className='uploadsrc'>
-          <img src="" alt="" />
+          <video className='testVideo' src={file? window.URL.createObjectURL(file): ''} controls></video>
         </div>
         <input
           type="file"
