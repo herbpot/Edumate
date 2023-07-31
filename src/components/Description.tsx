@@ -1,18 +1,10 @@
 'use client'
 
+import { Video } from "@/app/api/video/info/route"
 import Link from "next/link"
 
-export type videotype = {
-    title: string,
-    src: string,
-    date: string,
-    view: number,
-    good: number,
-    uploader: string,
-    files: any[],
-}
 
-export default function Description({ video, id, isUploader=false }: {video: videotype, id: string, isUploader: boolean}) {
+export default function Description({ video, id, isUploader=false }: {video: Video, id: string, isUploader: boolean}) {
     
     if (!isUploader){
         return (

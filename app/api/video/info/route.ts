@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { format } from "util";
 
 export interface Video {
+    id: string,
     title: string,
     src: string,
     description: string,
@@ -56,7 +57,7 @@ async function videoinfo(req: Request){
         good: video.good,
         uploader: video.uploader,
         tag: video.tag,
-        files: files
+        files: files.map((f) => (f.src as string).split('/')[3])
     })
 }
 

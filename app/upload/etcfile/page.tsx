@@ -18,9 +18,6 @@ function Upload() {
 
       const res = await fetch('/api/video/upload', {
         method: 'POST',
-        headers: {
-          isVideo:'true'
-        },
         body: data
       })
       // handle the error

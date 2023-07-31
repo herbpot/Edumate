@@ -10,15 +10,6 @@ export default async function Home() {
   });
 
   const video = await db.all("SELECT * FROM video ORDER BY good DESC");
-  const cut = 3
-  const videos: any[][] = [[]]
-  video.map((i) => {
-    if (video.indexOf(i) / cut){
-      videos.push(new Array())
-    }
-    videos[Math.floor(video.indexOf(i) / cut)].push(i)
-  })
-  
   return (
     <div>      
       <div className='videoFrame full'>

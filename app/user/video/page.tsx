@@ -1,10 +1,11 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { authOption } from "../../api/auth/[...nextauth]/route";
+import { Video } from "@/app/api/video/info/route";
 
 export default async function video() {
     const session = await getServerSession(authOption)
-    const video = await fetch('http://localhost:3000/api/user/info',{
+    const video = await fetch('http:localhost:3000/api/user/info',{
       method: 'POST',
       headers: {
         id__: session?.user?.email!
@@ -17,12 +18,11 @@ export default async function video() {
       const v = await res.json()
       return v.video!
     });
-    console.log(video);
     
 
     return (
         <div>
-            {video.map((i) => {
+            {video.map((i: Video) => {
             return (
               <div className='video'>
                 <Link href={'/user/video/'+i.id} className='video'>

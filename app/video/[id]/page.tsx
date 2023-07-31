@@ -21,6 +21,7 @@ export default async function Video({ params }: any) {
       
       return await res.json()
     });
+    console.log(video.files);
     
     return (
       <div>
@@ -30,7 +31,17 @@ export default async function Video({ params }: any) {
             <Description video={video} id={params.id} isUploader={false} />
           </div>  
           <div className="fileFrame">
-            <div className="files">{video.files}</div>
+            <div className="files">
+            {
+                video.files.map((f: string) => {
+                  return(
+                  <div id={f} className="etcfile"> 
+                    <h3>{f}</h3>
+                  </div>
+                  )
+                })
+              }
+              </div>
             <div className="filecontent"></div>
           </div>
         </div>

@@ -16,9 +16,9 @@ function Upload() {
       
       data.set('file', file)
       
-      const title = document.getElementById('title')!.value
-      const description = document.getElementById('description')!.value
-      const tag_ = document.getElementById('tag')!
+      const title = (document.getElementById('title')! as HTMLInputElement).value
+      const description = (document.getElementById('description')! as HTMLTextAreaElement).value
+      const tag_ = document.getElementById('tag')! as HTMLSelectElement
       const tag = tag_.options[tag_.selectedIndex].value
       setCookie('id', id)
       const res = await fetch('/api/video/upload', {

@@ -125,6 +125,33 @@
 .userinfo h3 {
   color: white;
 }
+.userinfo{
+  text-align: center;
+  background-color: rgb(29, 29, 29);
+  width: 80%;
+  margin: auto;
+  min-height: 400px;
+  padding: 10px;
+}
+.userinfo h3 {
+  border: 3px solid;
+  border-color: black;
+  border-radius: 2px;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 5px;
+  min-width: 300px;
+}
+.userinfo a {
+  border: 3px solid;
+  border-color: black;
+  border-radius: 2px;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 5px;
+  min-width: 300px;
+  color: white;
+}
 body {
   background-color: black;
 }
