@@ -1,6 +1,7 @@
 'use client'
 import { Video } from '@/app/api/video/info/route';
 import Description from '@/src/components/Description';
+import FileContent from '@/src/components/FileContent';
 import { notFound } from 'next/navigation';
 import {useEffect, useState} from 'react'
 
