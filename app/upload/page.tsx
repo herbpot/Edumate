@@ -7,7 +7,7 @@ function Upload() {
   const [file, setFile] = useState<File>()
   const id = (Math.round(new Date().getTime() + Math.random()*10000)).toString()
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!file) return
 
@@ -21,7 +21,7 @@ function Upload() {
       const tag_ = document.getElementById('tag')! as HTMLSelectElement
       const tag = tag_.options[tag_.selectedIndex].value
       setCookie('id', id)
-      const res = await fetch('/api/video/upload', {
+      fetch('/api/video/upload', {
         method: 'POST',
         headers: {
           title: title,
@@ -30,10 +30,11 @@ function Upload() {
           isVideo:'true'
         },
         body: data
+      }).then(res => {
+        if (!res.ok) res.text().then(_=>{throw new Error()})
+        window.location.href += '/etcfile'
       })
       // handle the error
-      if (!res.ok) throw new Error(await res.text())
-      window.location.href += '/etcfile'
     } catch (e: any) {
       // Handle errors here
       console.error(e)

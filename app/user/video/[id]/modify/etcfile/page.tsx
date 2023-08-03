@@ -26,7 +26,7 @@ export default function Etcfile({ params }: any) {
       });
   },[params])
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
         try {
             const data = new FormData()
@@ -46,8 +46,6 @@ export default function Etcfile({ params }: any) {
                 method: 'POST',
                 body: data
             }).then(() => window.location.href = '/')
-            // handle the error
-            // if (!res.ok) throw new Error(await res.text())
         } catch (e: any) {
             // Handle errors here
             console.error(e)

@@ -12,7 +12,7 @@ export default function Home() {
       next: {
         revalidate: 10,
       }
-    }).then(async (res) => res.json().then((j) => setVideo(j.videos)))
+    }).then((res) => res.json().then((j) => setVideo(j.videos)))
 
   }, [])
   return (

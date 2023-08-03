@@ -44,8 +44,6 @@ export default function Modify({ params }: any) {
                 },
                 body: data
             }).then(() => window.location.href += '/etcfile')
-            // handle the error
-            // if (!res.ok) throw new Error(await res.text())
         } catch (e: any) {
             // Handle errors here
             console.error(e)

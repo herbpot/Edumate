@@ -4,7 +4,7 @@ import { useState } from 'react'
 function Upload() {
   const [file, setFile] = useState<FileList>()
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!file) return
 
@@ -15,12 +15,13 @@ function Upload() {
         data.append('file', file.item(i)!)
       }
 
-      const res = await fetch('/api/video/upload', {
+      fetch('/api/video/upload', {
         method: 'POST',
         body: data
+      }).then(res => {
+        if (!res.ok) res.text().then(_ => {throw new Error()})
       })
       // handle the error
-      if (!res.ok) throw new Error(await res.text())
       
     } catch (e: any) {
       // Handle errors here
