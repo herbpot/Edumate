@@ -12,16 +12,13 @@ export async function POST(request: NextRequest) {
   
   const file: [File] | null = data.getAll('file') as unknown as [File]
   
-  console.log(request.cookies.get('id')?.value);
   
   if (!file) {
     return NextResponse.json({ success: false })
   }
   const isVideo = request.headers.get('isVideo')
-  console.log(file,isVideo);
   for (let i = 0; i < file.length; i++) {
     const f = file[i]!;
-    console.log(f);
     const bytes = await f.arrayBuffer()
     const buffer = Buffer.from(bytes)
     const filename = request.cookies.get('id')?.value

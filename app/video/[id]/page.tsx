@@ -1,5 +1,6 @@
 'use client'
 import Description from '@/src/components/Description';
+import FileContent from '@/src/components/FileContent';
 import { notFound } from 'next/navigation';
 
 export default async function Video({ params }: any) {  
@@ -21,7 +22,6 @@ export default async function Video({ params }: any) {
       
       return await res.json()
     });
-    console.log(video.files);
     
     return (
       <div>
@@ -33,16 +33,17 @@ export default async function Video({ params }: any) {
           <div className="fileFrame">
             <div className="files">
             {
-                video.files.map((f: string) => {
+                video.files.map((f: string, i_:number) => {
                   return(
-                  <div id={f} className="etcfile"> 
-                    <h3>{f}</h3>
+                  <div key={i_} id={f} className="etcfile"> 
+                    <h3 key={i_}>{f}</h3>
                   </div>
                   )
                 })
               }
               </div>
-            <div className="filecontent"></div>
+              <FileContent />
+            
           </div>
         </div>
           <div className='questionFrame'></div>

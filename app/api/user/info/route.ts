@@ -22,7 +22,6 @@ async function videoinfo(req: Request){
     const id = req.headers.get('id__')
 
     const video = await db.all(`select * from video where uploader='${id}'`)
-    console.log(`select * from video where uploader='${id}'`);
     
     return NextResponse.json({
         video: video

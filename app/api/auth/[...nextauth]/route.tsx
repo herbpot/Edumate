@@ -34,7 +34,7 @@ export const authOption: NextAuthOptions = {
      * 웹 토큰이 실행 혹은 업데이트될때마다 콜백이 실행
      * 반환된 값은 암호화되어 쿠키에 저장됨
      */
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account, profile }: any) {
       if (profile) {
         token.email = profile.response.email;
         token.name = profile.response.nickname;

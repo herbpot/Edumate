@@ -40,16 +40,16 @@ export default function Video({ params }: any) {
           <div className="fileFrame">
             <div className="files">
               {
-                video.files.map((f) => {
+                video.files.map((f, i_) => {
                   return(
-                  <div id={f} className="etcfile"> 
-                    <h3>{f}</h3>
+                  <div key={i_} id={f} className="etcfile"> 
+                    <h3 key={i_}>{f}</h3>
                   </div>
                   )
                 })
               }
             </div>
-            <div className="filecontent"></div>
+            <FileContent />
           </div>
         </div>
           <div className='questionFrame'></div>

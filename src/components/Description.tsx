@@ -19,7 +19,7 @@ export default function Description({ video, id, isUploader=false }: {video: Vid
                             headers: {
                                 vid: id
                             }
-                        }).then((req) => console.log(req))
+                        }).then()
                     }
                 }>good</button><small className="good">{video!.good}명이 좋아함</small>
                 <small>{video.uploader}이가 게시함</small>
@@ -38,7 +38,7 @@ export default function Description({ video, id, isUploader=false }: {video: Vid
                             headers: {
                                 vid: id
                             }
-                        }).then((req) => console.log(req))
+                        }).then()
                     }
                 }>good</button>
                 <small className="good">{video!.good}명이 좋아함</small>
@@ -50,7 +50,7 @@ export default function Description({ video, id, isUploader=false }: {video: Vid
                             headers: {
                                 vid: id
                             }
-                        }).then((req) => console.log(req))
+                        }).then()
                     }
                 }>게시물 삭제하기</button>
                 <button onClick={() => {window.location.href += '/modify'}}>게시물 수정하기</button>

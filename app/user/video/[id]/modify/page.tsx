@@ -4,7 +4,7 @@ import { setCookie } from 'cookies-next'
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
-export default function modify({ params }: any) {
+export default function Modify({ params }: any) {
     const [ video, setVideo ] = useState<Video>()
     const [ isLoading, setLoading ] = useState(true)
     useEffect(() => {

@@ -3,7 +3,7 @@ import { Video } from 'aws-sdk/clients/rekognition'
 import { setCookie } from 'cookies-next'
 import { useEffect, useState } from 'react'
 
-export default function etcfile({ params }: any) {
+export default function Etcfile({ params }: any) {
   const [file, setFile] = useState<[string]>()
   const [rmfile, setrmFile] = useState<[string]>([] as unknown as [string])
   const [newfile, setnewFile] = useState<FileList>()
@@ -73,11 +73,11 @@ export default function etcfile({ params }: any) {
     <div className='uploadForm'>
       <form onSubmit={onSubmit} className='uploadForm'>
         <div className='uploadsrc'>
-            {file?.map((f) => {
+            {file?.map((f, i_) => {
                 return(
-                    <div id={f} className="etcfile"> 
-                        <h3>{f}</h3>
-                        <small onClick={() => {
+                    <div key={i_} id={f} className="etcfile"> 
+                        <h3 key={i_}>{f}</h3>
+                        <small key={i_} onClick={() => {
                             rmfile?.push(f)
                             document.getElementById(f)!.style.display = 'none'
                             setrmFile(rmfile)

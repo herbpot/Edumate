@@ -10,7 +10,6 @@ function Upload() {
 
     try {
       const data = new FormData()
-      console.log(file);
       
       for (let i = 0; i < file.length; i++) {
         data.append('file', file.item(i)!)
