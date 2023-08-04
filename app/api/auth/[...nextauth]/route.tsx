@@ -8,9 +8,7 @@ const providers: Provider[] = [
     clientId: process.env.NAVER_CLIENT_ID || "",
     clientSecret: process.env.NAVER_SECRET || "",
     profileUrl: "https://openapi.naver.com/v1/nid/me",
-    profile: (profile) => {     
-      // console.log(profile.response);
-         
+    profile: (profile) => {              
       return {
         id: profile.response.id,
         email: profile.response.email,

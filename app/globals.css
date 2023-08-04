@@ -17,9 +17,6 @@
 .navbar div {
   display: flex;
 }
-.navbar div h5 {
-  margin-inline: 10px;
-}
 .navAuth{
   float: right;
   margin-left: auto;
@@ -27,8 +24,11 @@
   /* font-size: 3px; */
   font-style: bold;
 }
-.navAuth button {
-  margin-left: 5px;
+.navAuth h5 {
+  margin-right: 10px;
+}
+.navAuth #name {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .dividLine{
   width: 100%;
@@ -47,14 +47,14 @@
   width:100%;
 }
 .videoDiscription small {
-  margin: 3px;
-  padding: 2px;
+  padding-inline-end: 5px;
   color: rgb(175, 175, 175);
-  border-inline: 1px solid;
+  /* border-inline: 1px solid; */
   border-radius: 3px;
 }
 .videoTitle{
   color: rgb(175, 175, 175);
+  max-width: 150px;
 }
 .videoFrame{
   background-color: rgb(29, 29, 29);

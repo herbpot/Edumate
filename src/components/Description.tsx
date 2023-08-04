@@ -1,11 +1,12 @@
 'use client'
 
 import { Video } from "@/app/api/video/info/route"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 
 export default function Description({ video, id, isUploader=false }: {video: Video, id: string, isUploader: boolean}) {
-    
+    const [good, setgood] = useState(video.good as unknown as string)
     if (!isUploader){
         return (
             <div className="videoDiscription">
@@ -19,9 +20,11 @@ export default function Description({ video, id, isUploader=false }: {video: Vid
                             headers: {
                                 vid: id
                             }
-                        }).then()
+                        }).then(_ => {
+                            _.text().then(t => setgood(t))
+                        })
                     }
-                }>good</button><small className="good">{video!.good}명이 좋아함</small>
+                }>good</button><small className="good">{good}명이 좋아함</small>
                 <small>{video.uploader}이가 게시함</small>
             </div>
         )
@@ -31,17 +34,7 @@ export default function Description({ video, id, isUploader=false }: {video: Vid
                 <h1 className="videoTitle">{video!.title}</h1>
                 <small className="uploaddate">{video!.date}에 게시</small>
                 <small className="view">{video!.view}회 시청</small>
-                <button onClick={
-                    () => {
-                        fetch(`http://localhost:3000/api/video/good`, {
-                            method: 'POST',
-                            headers: {
-                                vid: id
-                            }
-                        }).then()
-                    }
-                }>good</button>
-                <small className="good">{video!.good}명이 좋아함</small>
+                <small className="good">{good}명이 좋아함</small>
                 <small>{video.uploader}이가 게시함</small>
                 <button onClick={
                     () => {

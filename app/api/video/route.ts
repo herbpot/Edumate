@@ -1,8 +1,12 @@
 import * as fs from 'fs'
+import { getServerSession } from "next-auth";
+import { authOption } from '../auth/[...nextauth]/route';
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
 
 const CHUNK_SIZE_IN_BYTES = 1000000
 
-function getVideoStream(req:Request) {
+async function getVideoStream(req:Request) {
   const range = req.headers.get('range')
 
   if (!range) {
@@ -25,6 +29,23 @@ function getVideoStream(req:Request) {
     start: chunkStart,
     end: chunkEnd
   })
+  if (chunkEnd == b-1){
+    const db = await open({
+      filename: './db.sqlite',
+      driver: sqlite3.Database,
+    });
+    const session = await getServerSession(authOption)
+    const id = path.split('_')[0].split('/')[3]
+    const view = await db.get(`select view from video where id='${id}'`)
+    if (session !== null){
+        const views = await db.get(`select * from views where videoid='${id}' and userId='${session?.user?.email}'`)
+        if (views === undefined){
+            await db.exec(`insert into views (videoId, userId) values('${id}', '${session?.user?.email}')`)
+        }
+    }
+    await db.exec(`update video set view='${view!.view+1}' where id='${id}'`)
+    
+  }
   return new Response(stream as any, {
     status: 206,
     headers

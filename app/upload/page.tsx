@@ -53,28 +53,41 @@ function Upload() {
         />
         <input id="title" type="text" placeholder='영상 제목' />
         <textarea id="description" placeholder='영상 설명' />
-        <select name="tag" id="tag">
-            <option value="math" selected>수학</option>
-            <option value="math">국어</option>
-            <option value="math">영어</option>
-            <option value="math">물리1</option>
-            <option value="math">물리2</option>
-            <option value="math">화학1</option>
-            <option value="math">화학2</option>
-            <option value="math">생명1</option>
-            <option value="math">생명2</option>
-            <option value="math">지구1</option>
-            <option value="math">지구2</option>
-            <option value="math">정법</option>
-            <option value="math">한지</option>
-            <option value="math">세지</option>
-            <option value="math">여지</option>
-            <option value="math">여지</option>
+        <select name="tag" id="tag" defaultValue={'math'}>
+            <option value="math">수학</option>
+            <option value="krla">국어</option>
+            <option value="engl">영어</option>
+            <option value="phs1">물리1</option>
+            <option value="phs2">물리2</option>
+            <option value='chm1'>화학1</option>
+            <option value='chm2'>화학2</option>
+            <option value='bio1'>생명1</option>
+            <option value='bio2'>생명2</option>
+            <option value='esc1'>지구1</option>
+            <option value='esc2'>지구2</option>
+            <option value='eths'>윤사</option>
+            <option value='kgry'>한지</option>
+            <option value='wgry'>세지</option>
+            <option value='leth'>생윤</option>
+            <option value='pola'>정법</option>
+            <option value='sclt'>사문</option>
+            <option value='tgry'>여지</option>
         </select>
         <input type="submit" value="Upload" />
       </form>
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
 
 export default Upload;

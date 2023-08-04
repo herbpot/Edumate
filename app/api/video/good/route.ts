@@ -11,7 +11,6 @@ async function updateVideoGood(req:Request) {
     });
     const vid = req.headers.get('vid')
     const session = await getServerSession(authOption)
-    console.log(session);
     
     
     const video = await db.get(`SELECT good FROM video where id='${vid}'`);
@@ -19,10 +18,15 @@ async function updateVideoGood(req:Request) {
     if (g === undefined){
         await db.exec(`insert into goods (videoId, userId) values ('${vid}', '${session?.user?.email}')`)
         await db.exec(`update video set good=${video.good+1} where id='${vid}'`)
+        return new Response(video.good+1,{
+            status: 206,
+        })
+    }else{
+        return new Response(video.good,{
+            status: 206,
+        })
     }
-    return new Response(null,{
-        status: 206,
-    })
+    
 }
 
 export async function POST(req: Request) {

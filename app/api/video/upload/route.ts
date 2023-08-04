@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
     const f = file[i]!;
     const bytes = await f.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    const filename = request.cookies.get('id')?.value
-    const path = isVideo != 'true' ? `src/data/video/${filename}_${f.name}` : `src/data/etcFiles/${filename}_${f.name}`
+    const id = request.cookies.get('id')?.value
+    const path = isVideo != 'true' ? `src/data/video/${id}_${f.name}` : `src/data/etcFiles/${id}_${f.name}`
     await writeFile(path, buffer)
     if (!isVideo) {
       await db.exec(`insert into etcFile(vid, src) values('${request.cookies.get('id')?.value}', '${path}')`)

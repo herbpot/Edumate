@@ -22,7 +22,8 @@ export default function Nav() {
                 {
                     session ?
                     <div>
-                        <h5 onClick={() => {window.location.href = `/user`}}>{session.user?.name}</h5>
+                        <h5 id="name" onClick={() => {window.location.href = `/user/video`}}>{session.user?.name}</h5>
+                        <h5 onClick={() => {window.location.href = `/upload`}}>업로드</h5>
                         <h5 onClick={() => signOut()}>로그아웃</h5>
                     </div>
                     :

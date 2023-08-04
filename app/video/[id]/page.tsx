@@ -35,8 +35,8 @@ export default async function Video({ params }: any) {
             {
                 video.files.map((f: string, i_:number) => {
                   return(
-                  <div key={i_} id={f} className="etcfile"> 
-                    <h3 key={i_}>{f}</h3>
+                  <div key={Math.random()} id={f} className="etcfile"> 
+                    <h3 key={Math.random()}>{f}</h3>
                   </div>
                   )
                 })

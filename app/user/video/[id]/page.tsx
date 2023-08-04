@@ -43,8 +43,8 @@ export default function Video({ params }: any) {
               {
                 video.files.map((f, i_) => {
                   return(
-                  <div key={i_} id={f} className="etcfile"> 
-                    <h3 key={i_}>{f}</h3>
+                  <div key={Math.random()} id={f} className="etcfile"> 
+                    <h3 key={Math.random()}>{f}</h3>
                   </div>
                   )
                 })

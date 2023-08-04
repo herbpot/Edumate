@@ -73,9 +73,9 @@ export default function Etcfile({ params }: any) {
         <div className='uploadsrc'>
             {file?.map((f, i_) => {
                 return(
-                    <div key={i_} id={f} className="etcfile"> 
-                        <h3 key={i_}>{f}</h3>
-                        <small key={i_} onClick={() => {
+                    <div key={Math.random()} id={f} className="etcfile"> 
+                        <h3 key={Math.random()}>{f}</h3>
+                        <small key={Math.random()} onClick={() => {
                             rmfile?.push(f)
                             document.getElementById(f)!.style.display = 'none'
                             setrmFile(rmfile)
