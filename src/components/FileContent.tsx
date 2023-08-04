@@ -1,55 +1,59 @@
 import { useState, useEffect } from "react";
 
-const downloadModifiedFile = (filename: string = "test") => {
-  fetch("/src/data/etcfile/" + filename)
-    .then((res) => res.blob())
-    .then((b) => {
-      const url = URL.createObjectURL(b);
+const downloadFile = (filename: string) => {
+  const fileURL = `/src/data/etcfile/${encodeURIComponent(filename)}`;
+  fetch(fileURL)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.target = "_blank"; // Open the link in a new tab
+      a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+      // Handle the error here, e.g., show an error message to the user
     });
 };
 
-export default function FileContent({ id }: { id: string }) {
-  const [filelist, setFilelist] = useState<JSX.Element[] | null>(null);
+export default function FileContent() {
+  const [filelist, setFilelist] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/video/etcfile", {
-      method: "POST",
-      headers: {
-        id__: id,
-      },
-    })
-      .then((res) => res.json())
-      .then((j) => {
-        console.log(j);
-        const fileListElements = j.files.map((f: string) => (
-          <div key={f} onClick={() => downloadModifiedFile(f)}>
-            {f}
-          </div>
-        ));
-        setFilelist(fileListElements);
-      });
-  }, [id]);
+    fetchFiles();
+  }, []);
+
+  const fetchFiles = async () => {
+    const response = await fetch("/src/data/etcfile");
+    if (response.ok) {
+      const files = await response.json();
+      setFilelist(files);
+    } else {
+      console.error(
+        "Error fetching file list:",
+        response.status,
+        response.statusText
+      );
+    }
+  };
+
+  if (filelist.length === 0) {
+    return <div style={{ color: "white" }}>No files found.</div>;
+  }
 
   return (
     <div className="filecontent">
-      {filelist === null ? (
-        <div>Loading file list...</div>
-      ) : (
-        <>
-          {filelist}
-          <div
-            onClick={() => downloadModifiedFile()}
-            style={{ color: "white" }}
-          >
-            test
-          </div>
-        </>
-      )}
+      {filelist.map((filename) => (
+        <div
+          key={filename}
+          onClick={() => downloadFile(filename)}
+          style={{ color: "white", cursor: "pointer" }}
+        >
+          {filename}
+        </div>
+      ))}
     </div>
   );
 }
