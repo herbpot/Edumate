@@ -22,7 +22,7 @@ const providers: Provider[] = [
     clientSecret: process.env.KAKAO_SECRET || "",
     profileUrl: "",
     profile: (profile) => {
-                    
+                      
       return {
         id: profile.id,
         email: profile.kakao_account.email,

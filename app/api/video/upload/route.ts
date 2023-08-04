@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     if (!isVideo) {
       await db.exec(`insert into etcFile(vid, src) values('${request.cookies.get('id')?.value}', '${path}')`)
     }else {
-      await db.exec(`insert into video(id, title, description, src, date, view, good, uploader) values('${request.cookies.get('id')?.value}', '${request.headers.get('title')}', '${request.headers.get('description')}', '${path}', 0, 0, ${session?.user?.name})`)
+      await db.exec(`insert into video(id, title, description, src, date, view, good, uploader) values('${request.cookies.get('id')?.value}', '${request.headers.get('title')}', '${request.headers.get('description')}', '${path}', 0, 0, ${session!.user!.email})`)
     }
   }
   

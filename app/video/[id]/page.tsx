@@ -1,16 +1,16 @@
 'use client'
+import { Video } from '@/app/api/video/info/route';
 import Description from '@/src/components/Description';
 import FileContent from '@/src/components/FileContent';
 import { notFound } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export default async function Video({ params }: any) {  
-  try{
-    
-    if (params.id == 'favicon.ico'){
-      return
-    }
-    
-    const video = await fetch('http://localhost:3000/api/video/info',{
+export default function Video({ params }: any) {  
+  const [video, setvideo] = useState({} as Video)
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() =>{
+    fetch('http://localhost:3000/api/video/info',{
       method: 'POST',
       headers: {
         id__: params.id
@@ -18,37 +18,38 @@ export default async function Video({ params }: any) {
       next: {
         revalidate: 10,
       }
-    }).then(async(res) => {
-      
-      return await res.json()
+    }).then((res) => {
+      res.json().then(j =>{
+        setvideo(j)
+        setLoading(false)
+      })
     });
-    
-    return (
-      <div>
-        <div className="videoViewFrame">
-          <div className="videoFrame">
-            <video src={'/api/video?fileName='+video!.src} controls></video>
-            <Description video={video} id={params.id} isUploader={false} />
-          </div>  
-          <div className="fileFrame">
-            <div className="files">
-              {
-                video.files.map((f: string, i_:number) => {
-                  console.log(f);
-                  
-                  return(
-                    <FileContent name={f} />
-                  )
-                })
-              }
-              </div>
-            
-          </div>
+  }, [params])
+  
+  if (loading) return
+  
+  return (
+    <div>
+      <div className="videoViewFrame">
+        <div className="videoFrame">
+          <video src={'/api/video?fileName='+video!.src} controls></video>
+          <Description video={video} id={params.id} isUploader={false} />
+        </div>  
+        <div className="fileFrame">
+          <div className="files">
+            {
+              video.files.map((f: string, i_:number) => {
+                
+                return(
+                  <FileContent key={i_} name={f} />
+                )
+              })
+            }
+            </div>
+          
         </div>
-          <div className='questionFrame'></div>
       </div>
-    );
-  }catch{
-    notFound()
-  }
+        <div className='questionFrame'></div>
+    </div>
+  );
 }
