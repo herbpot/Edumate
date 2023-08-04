@@ -2,6 +2,7 @@ import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from "next-auth";
 
 export async function POST(request: NextRequest) {
   const db = await open({
@@ -18,6 +19,8 @@ export async function POST(request: NextRequest) {
   }
   const isVideo = request.headers.get('isVideo')
   for (let i = 0; i < file.length; i++) {
+    const session = await getServerSession()
+    if (session === null) return NextResponse.json({ success: false })
     const f = file[i]!;
     const bytes = await f.arrayBuffer()
     const buffer = Buffer.from(bytes)
@@ -27,7 +30,7 @@ export async function POST(request: NextRequest) {
     if (!isVideo) {
       await db.exec(`insert into etcFile(vid, src) values('${request.cookies.get('id')?.value}', '${path}')`)
     }else {
-      await db.exec(`insert into video(id, title, description, src, date, view, good) values('${request.cookies.get('id')?.value}', '${request.headers.get('title')}', '${request.headers.get('description')}', '${path}', 0, 0)`)
+      await db.exec(`insert into video(id, title, description, src, date, view, good, uploader) values('${request.cookies.get('id')?.value}', '${request.headers.get('title')}', '${request.headers.get('description')}', '${path}', 0, 0, ${session?.user?.name})`)
     }
   }
   

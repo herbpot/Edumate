@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import { Provider } from "next-auth/providers";
 import NaverProvider from "next-auth/providers/naver";
+import KakaoProvider from "next-auth/providers/kakao"
 
 const providers: Provider[] = [
   NaverProvider({
@@ -13,6 +14,20 @@ const providers: Provider[] = [
         id: profile.response.id,
         email: profile.response.email,
         name: profile.response.nickname,
+      };
+    },
+  }),
+  KakaoProvider({
+    clientId: process.env.KAKAO_CLIENT_ID || "",
+    clientSecret: process.env.KAKAO_SECRET || "",
+    profileUrl: "",
+    profile: (profile) => {
+      console.log('profile::',profile);
+                    
+      return {
+        id: profile.id,
+        email: profile.kakao_account.email,
+        name: profile.kakao_account.profile.nickname,
       };
     },
   }),
@@ -33,9 +48,11 @@ export const authOption: NextAuthOptions = {
      * 반환된 값은 암호화되어 쿠키에 저장됨
      */
     async jwt({ token, user, account, profile }: any) {
+      console.log('token, user, account, profile::',token, user, account, profile);
+      
       if (profile) {
-        token.email = profile.response.email;
-        token.name = profile.response.nickname;
+        token.email = user.email;
+        token.name = user.name;
       }
       return token
     },
