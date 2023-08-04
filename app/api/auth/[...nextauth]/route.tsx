@@ -22,7 +22,6 @@ const providers: Provider[] = [
     clientSecret: process.env.KAKAO_SECRET || "",
     profileUrl: "",
     profile: (profile) => {
-      console.log('profile::',profile);
                     
       return {
         id: profile.id,
@@ -48,7 +47,6 @@ export const authOption: NextAuthOptions = {
      * 반환된 값은 암호화되어 쿠키에 저장됨
      */
     async jwt({ token, user, account, profile }: any) {
-      console.log('token, user, account, profile::',token, user, account, profile);
       
       if (profile) {
         token.email = user.email;

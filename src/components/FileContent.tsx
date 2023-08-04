@@ -10,31 +10,10 @@ const downloadModifiedFile = (filename: string = "test") => {
     });
 };
 
-export default function FileContent({ id }: { id: string }) {
-  const filelist: ReactElement[] = [];
-
-  fetch("http://localhost:3000/api/video/etcfile", {
-    method: "POST",
-    headers: {
-      id__: id,
-    },
-  })
-    .then((res) => res.json())
-    .then((j) => {
-      console.log(j);
-      j.files.map((f: string) => {
-        filelist.push(
-          <div key={f} onClick={() => downloadModifiedFile(f)}>
-            {f}
-          </div>
-        );
-      });
-    });
-
-  return (
-    <div className="filecontent">
-      {filelist}
-      <div onClick={() => downloadModifiedFile()}>{"test"}</div>
-    </div>
-  );
+export default function FileContent({ name }: { name: string }) {
+    return (
+        <div key={Math.random()} id={name} className="etcfile" onClick={() => downloadModifiedFile(name)}> 
+            <h3 key={Math.random()}>{name}</h3>
+        </div>
+    );
 }

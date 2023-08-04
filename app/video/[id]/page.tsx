@@ -32,17 +32,16 @@ export default async function Video({ params }: any) {
           </div>  
           <div className="fileFrame">
             <div className="files">
-            {
+              {
                 video.files.map((f: string, i_:number) => {
+                  console.log(f);
+                  
                   return(
-                  <div key={Math.random()} id={f} className="etcfile"> 
-                    <h3 key={Math.random()}>{f}</h3>
-                  </div>
+                    <FileContent name={f} />
                   )
                 })
               }
               </div>
-              <FileContent />
             
           </div>
         </div>
