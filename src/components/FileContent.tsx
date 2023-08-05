@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const downloadFile = (filename: string) => {
   const fileURL = `/src/data/etcfile/${encodeURIComponent(filename)}`;
@@ -39,6 +39,11 @@ export default function FileContent() {
     }
   };
 
+  const handleFileClick = (filename: string) => {
+    // 클릭한 파일을 다운로드
+    downloadFile(filename);
+  };
+
   if (filelist.length === 0) {
     return <div style={{ color: "white" }}>No files found.</div>;
   }
@@ -48,7 +53,7 @@ export default function FileContent() {
       {filelist.map((filename) => (
         <div
           key={filename}
-          onClick={() => downloadFile(filename)}
+          onClick={() => handleFileClick(filename)}
           style={{ color: "white", cursor: "pointer" }}
         >
           {filename}
