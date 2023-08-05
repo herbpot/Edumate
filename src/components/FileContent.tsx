@@ -8,7 +8,7 @@ export default function FileContent() {
   }, []);
 
   const fetchFiles = () => {
-    fetch("/src/data/etcfile") // 올바른 경로로 수정
+    fetch("/src/data/etcfile")
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -26,9 +26,20 @@ export default function FileContent() {
   };
 
   const downloadFile = (filename: string) => {
-    const fileURL = `/src/data/etcfile/${encodeURIComponent(filename)}`;
-    fetch(fileURL)
-      .then((response) => response.blob())
+    fetch(`/api/download/${encodeURIComponent(filename)}`, {
+      headers: {
+        "Content-Type": "application/octet-stream",
+      },
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Error downloading file: ${response.status} ${response.statusText}`
+          );
+        }
+        return response.blob();
+      })
       .then((blob) => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -39,7 +50,6 @@ export default function FileContent() {
       })
       .catch((error) => {
         console.error("Error downloading file:", error);
-        // Handle the error here, e.g., show an error message to the user
       });
   };
 
